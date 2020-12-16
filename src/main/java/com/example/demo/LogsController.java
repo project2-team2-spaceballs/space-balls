@@ -10,8 +10,11 @@ public class LogsController {
 
     private final LogsRepository repository;
 
-    public LogsController(LogsRepository repository){
+    private final LogHistoryRepository historyRepository;
+
+    public LogsController(LogsRepository repository, LogHistoryRepository historyRepository){
         this.repository = repository;
+        this.historyRepository = historyRepository;
     }
 
     @GetMapping("")
@@ -28,5 +31,13 @@ public class LogsController {
     public Logs create(@RequestBody Logs log) {
         return this.repository.save(log);
     }
+
+//    @PatchMapping("/{id}")
+//    public String updateEntry(@RequestBody Logs logUpdate){
+//        Optional<Logs> currentEntry = this.repository.findById(logUpdate.getId());
+//        if(currentEntry.isEmpty()){
+//            return
+//        }
+//    }
 
 }
