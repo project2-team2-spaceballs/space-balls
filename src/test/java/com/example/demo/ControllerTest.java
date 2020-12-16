@@ -43,6 +43,17 @@ public class ControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.user_id", is(1)))
+                .andExpect((jsonPath("$.latitude", is(41.7532))));
+    }
+
+    @Test
+    public void testGetAssetRequestMessageById() throws Exception {
+        MockHttpServletRequestBuilder request = get("/asset-request/message/1");
+
+        this.mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", is(1)))
+                .andExpect(jsonPath("$.user_id", is(1)))
                 .andExpect((jsonPath("$.text", is("Need this, no questions asked"))));
     }
 
