@@ -27,8 +27,8 @@ public class LogCommentsTest {
 
     @Test
     public void testSetGetLogId() {
-        logComments.setLog_id(1L);
-        Long result = logComments.getLog_id();
+        logComments.setLogId(1L);
+        Long result = logComments.getLogId();
         assertEquals(1, result);
     }
 

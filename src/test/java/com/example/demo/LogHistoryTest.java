@@ -27,8 +27,8 @@ public class LogHistoryTest {
 
     @Test
     public void testSetGetLogId() {
-        logHistory.setLog_id(1L);
-        Long result = logHistory.getLog_id();
+        logHistory.setLogId(1L);
+        Long result = logHistory.getLogId();
         assertEquals(1, result);
     }
 

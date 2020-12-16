@@ -9,7 +9,8 @@ public class LogComments {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long log_id;
+    @Column(name = "log_id")
+    private Long logId;
     private String details;
     private Date comment_dtg;
 
@@ -21,12 +22,12 @@ public class LogComments {
         this.id = id;
     }
 
-    public Long getLog_id() {
-        return log_id;
+    public Long getLogId() {
+        return logId;
     }
 
-    public void setLog_id(Long log_id) {
-        this.log_id = log_id;
+    public void setLogId(Long logId) {
+        this.logId = logId;
     }
 
     public String getDetails() {
