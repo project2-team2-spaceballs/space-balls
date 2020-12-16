@@ -1,9 +1,6 @@
 package com.example.demo;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,5 +25,10 @@ public class UserController {
         return this.repository.findById(id).get();
     }
 
+    @PostMapping("")
+    public String addNewUser(@RequestBody User newUser) {
+        this.repository.save(newUser);
+        return "User saved in database.";
+    }
 
 }

@@ -1,9 +1,6 @@
 package com.example.demo;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/asset-request")
@@ -23,5 +20,9 @@ public class AssetRequestController {
         return this.repository.findById(id).get();
     }
 
-
+    @PostMapping("")
+    public String addNewRequest(@RequestBody AssetRequest newRequest) {
+        this.repository.save(newRequest);
+        return "Request saved in database.";
+    }
 }
