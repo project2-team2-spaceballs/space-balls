@@ -1,13 +1,10 @@
 package com.example.demo;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.web.servlet.MockMvc;
@@ -82,7 +79,7 @@ public class LogsControllerTest {
     @Rollback
     public void testPostLogEntry() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
-        HashMap<String, Object> newLog = new HashMap<String, Object>(){
+        HashMap<String, Object> newLog = new HashMap<>(){
             {
                 put("sensor_id", 1);
                 put("details", "This is my new log entry");
@@ -112,7 +109,7 @@ public class LogsControllerTest {
         log1.setEntry_dtg(new GregorianCalendar(2020, Calendar.DECEMBER, 15, 15, 10, 0).getTime());
         repository.save(log1);
         ObjectMapper objectMapper = new ObjectMapper();
-        HashMap<String, Object> updatedLog = new HashMap<String, Object>(){
+        HashMap<String, Object> updatedLog = new HashMap<>(){
             {
                 put("id", log1.getId());
                 put("details", "This is my updated log entry.");
@@ -141,7 +138,7 @@ public class LogsControllerTest {
         log1.setEntry_dtg(new GregorianCalendar(2020, Calendar.DECEMBER, 15, 15, 10, 0).getTime());
         repository.save(log1);
         ObjectMapper objectMapper = new ObjectMapper();
-        HashMap<String, Object> updatedLog = new HashMap<String, Object>(){
+        HashMap<String, Object> updatedLog = new HashMap<>(){
             {
                 put("id", log1.getId());
                 put("archived", true);

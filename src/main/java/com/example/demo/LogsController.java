@@ -1,7 +1,6 @@
 package com.example.demo;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -46,12 +45,12 @@ public class LogsController {
         }
 
         Logs currentEntry = result.get();
-//        LogHistory historyEntry = new LogHistory();
-//        historyEntry.setLog_id(currentEntry.getId());
-//        historyEntry.setDetails(currentEntry.getDetails());
-//        historyEntry.setOriginal_dtg(currentEntry.getEntry_dtg());
-//        historyEntry.setUpdated_dtg(new Date());
-//        this.historyRepository.save(historyEntry);
+        LogHistory historyEntry = new LogHistory();
+        historyEntry.setLogId(currentEntry.getId());
+        historyEntry.setDetails(currentEntry.getDetails());
+        historyEntry.setOriginal_dtg(currentEntry.getEntry_dtg());
+        historyEntry.setUpdated_dtg(new Date());
+        this.historyRepository.save(historyEntry);
 
         if(logUpdate.getDetails() != null){
             currentEntry.setDetails(logUpdate.getDetails());
