@@ -100,4 +100,113 @@ public class LogsControllerTest {
                 .andExpect(jsonPath("$.id", instanceOf(Number.class)))
                 .andExpect(jsonPath("$.details", is("This is my new log entry")));
     }
+
+    @Test
+    @Transactional
+    @Rollback
+    public void testUpdateLogEntryAndAddToHistory() throws Exception {
+        Logs log1;
+        log1 = new Logs();
+        log1.setSensor_id(1L);
+        log1.setDetails("This is the first entry");
+        log1.setEntry_dtg(new GregorianCalendar(2020, Calendar.DECEMBER, 15, 15, 10, 0).getTime());
+        repository.save(log1);
+        ObjectMapper objectMapper = new ObjectMapper();
+        HashMap<String, Object> updatedLog = new HashMap<String, Object>(){
+            {
+                put("id", log1.getId());
+                put("details", "This is my updated log entry.");
+            }
+        };
+        String json = objectMapper.writeValueAsString(updatedLog);
+
+        MockHttpServletRequestBuilder request = patch("/logs/" + log1.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json);
+
+        this.mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", is(log1.getId().intValue())))
+                .andExpect(jsonPath("$.details", is("This is my updated log entry.")));
+    }
+
+    @Test
+    @Transactional
+    @Rollback
+    public void testArchiveAnEntry() throws Exception {
+        Logs log1;
+        log1 = new Logs();
+        log1.setSensor_id(1L);
+        log1.setDetails("This is the first entry");
+        log1.setEntry_dtg(new GregorianCalendar(2020, Calendar.DECEMBER, 15, 15, 10, 0).getTime());
+        repository.save(log1);
+        ObjectMapper objectMapper = new ObjectMapper();
+        HashMap<String, Object> updatedLog = new HashMap<String, Object>(){
+            {
+                put("id", log1.getId());
+                put("archived", true);
+            }
+        };
+        String json = objectMapper.writeValueAsString(updatedLog);
+
+        MockHttpServletRequestBuilder request = patch("/logs/" + log1.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json);
+
+        this.mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", is(log1.getId().intValue())))
+                .andExpect(jsonPath("$.archived", is(true)));
+    }
+
+    @Test
+    @Transactional
+    @Rollback
+    public void testSearchEntriesReturnsOne() throws Exception {
+        Logs log1;
+        log1 = new Logs();
+        log1.setSensor_id(1L);
+        log1.setDetails("This is the first entry");
+        log1.setEntry_dtg(new GregorianCalendar(2020, Calendar.DECEMBER, 15, 15, 10, 0).getTime());
+        repository.save(log1);
+        Logs log2;
+        log2 = new Logs();
+        log2.setSensor_id(1L);
+        log2.setDetails("This is the second entry");
+        log2.setEntry_dtg(new GregorianCalendar(2020, Calendar.DECEMBER, 15, 15, 10, 0).getTime());
+        repository.save(log2);
+
+        MockHttpServletRequestBuilder request = get("/logs/find?search=second")
+                .contentType(MediaType.APPLICATION_JSON);
+
+        this.mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].details", is("This is the second entry")));
+    }
+
+    @Test
+    @Transactional
+    @Rollback
+    public void testSearchEntriesReturnsTwoMissCased() throws Exception {
+        Logs log1;
+        log1 = new Logs();
+        log1.setSensor_id(1L);
+        log1.setDetails("This is the first entry");
+        log1.setEntry_dtg(new GregorianCalendar(2020, Calendar.DECEMBER, 15, 15, 10, 0).getTime());
+        repository.save(log1);
+        Logs log2;
+        log2 = new Logs();
+        log2.setSensor_id(1L);
+        log2.setDetails("This is the second entry");
+        log2.setEntry_dtg(new GregorianCalendar(2020, Calendar.DECEMBER, 15, 15, 10, 0).getTime());
+        repository.save(log2);
+
+        MockHttpServletRequestBuilder request = get("/logs/find?search=tHis")
+                .contentType(MediaType.APPLICATION_JSON);
+
+        this.mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].details", is("This is the first entry")))
+                .andExpect(jsonPath("$[1].details", is("This is the second entry")));
+    }
 }
