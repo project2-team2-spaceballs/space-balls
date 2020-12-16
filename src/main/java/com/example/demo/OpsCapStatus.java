@@ -28,3 +28,4 @@ public class OpsCapStatus {
             this.color = color;
         }
     }
+
