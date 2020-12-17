@@ -20,9 +20,15 @@ public class AssetRequestController {
         return this.repository.findById(id).get();
     }
 
+    @GetMapping("/userId/{userId}")
+    public Iterable<AssetRequest> getAssetRequestByUserId(@PathVariable Long userId) {
+        Iterable<AssetRequest> result = this.repository.findByUserId(userId);
+        return result;
+    }
+
+
     @PostMapping("")
-    public String addNewRequest(@RequestBody AssetRequest newRequest) {
-        this.repository.save(newRequest);
-        return "Request saved in database.";
+    public AssetRequest addNewRequest(@RequestBody AssetRequest newRequest) {
+        return this.repository.save(newRequest);
     }
 }
