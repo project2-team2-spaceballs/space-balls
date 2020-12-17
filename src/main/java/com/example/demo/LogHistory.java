@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -39,6 +41,7 @@ public class LogHistory {
         this.details = details;
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public Date getOriginal_dtg() {
         return original_dtg;
     }
@@ -47,6 +50,7 @@ public class LogHistory {
         this.original_dtg = original_dtg;
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public Date getUpdated_dtg() {
         return updated_dtg;
     }

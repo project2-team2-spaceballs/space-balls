@@ -61,7 +61,7 @@ public class LogCommentsControllerTest {
     @Rollback
     public void testPostToComments() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
-        HashMap<String, Object> newLog = new HashMap<String, Object>(){
+        HashMap<String, Object> newLog = new HashMap<>(){
             {
                 put("log_id", 1);
                 put("details", "This is my new log comment entry");
