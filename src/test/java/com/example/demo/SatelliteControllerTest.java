@@ -39,17 +39,17 @@ public class SatelliteControllerTest {
 //        sat1.setStatus(3);
 //
 //
-//        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.get("/satellites/20000")
+//        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.get("/satellites/22010")
 //                .contentType(MediaType.APPLICATION_JSON);
 //
 //        this.mvc.perform(request)
 //                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.id", is("20000")))
-//                .andExpect(jsonPath("$.period", is("99.0")))
-//                .andExpect(jsonPath("$.inclination", is("55.0")))
-//                .andExpect(jsonPath("$.elset", is("70")))
-//                .andExpect(jsonPath("$.rcs", is("1.00")))
-//                .andExpect(jsonPath("$.mission_type", is("Experimental Satellite")))
-//                .andExpect(jsonPath("$.status", is("3")));
+//                .andExpect(jsonPath("$.id", is("22010")))
+//                .andExpect(jsonPath("$.period", is("98.23")))
+//                .andExpect(jsonPath("$.inclination", is("55.75")))
+//                .andExpect(jsonPath("$.elset", is("170")))
+//                .andExpect(jsonPath("$.rcs", is("1.50")))
+//                .andExpect(jsonPath("$.mission_type", is("Naval Navigation")))
+//                .andExpect(jsonPath("$.status", is("0")));
 //    }
 }

@@ -11,18 +11,17 @@ public class Passes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int sat_id;
-
+    @Column(name="sat_id")
+    private int satId;
     @Column(columnDefinition = "pass_start")
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date pass_start;
-
     @Column(columnDefinition = "pass_stop")
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date pass_stop;
-
     private float toes;
     private boolean nk_fence;
+    private boolean k_fence;
 
     public int getId() {
         return id;
@@ -32,12 +31,12 @@ public class Passes {
         this.id = id;
     }
 
-    public int getSat_id() {
-        return sat_id;
+    public int getSatId() {
+        return satId;
     }
 
-    public void setSat_id(int sat_id) {
-        this.sat_id = sat_id;
+    public void setSatId(int satId) {
+        this.satId = satId;
     }
 
     public Date getPass_start() {
@@ -80,5 +79,5 @@ public class Passes {
         this.k_fence = k_fence;
     }
 
-    private boolean k_fence;
+
 }

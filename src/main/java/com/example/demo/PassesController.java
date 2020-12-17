@@ -17,7 +17,7 @@ public class PassesController {
     }
 
     @GetMapping("/{sat_id}")
-    public Iterable<Passes> getPassesById(@PathVariable int sat_id) {
-        return this.passes_repo.getPassesById(sat_id);
+    public Iterable<Passes> getPassesBySatId(@PathVariable int sat_id) {
+        return this.passes_repo.getPassesBySatId(sat_id);
     }
 }

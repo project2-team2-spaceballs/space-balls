@@ -18,6 +18,7 @@ public class SatelliteController {
 
     @GetMapping("/{id}")
     public Iterable<Satellite> getSatById(@PathVariable int id) {
+
         return this.satellite_repo.getSatById(id);
     }
 
