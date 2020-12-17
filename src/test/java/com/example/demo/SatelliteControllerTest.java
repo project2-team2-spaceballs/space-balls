@@ -24,7 +24,7 @@ public class SatelliteControllerTest {
 //
 //    @Autowired
 //    private SatelliteRepository satellite_repo;
-//
+
 //    @Test
 //    @Transactional
 //    @Rollback
@@ -49,7 +49,7 @@ public class SatelliteControllerTest {
 //                .andExpect(jsonPath("$.inclination", is("55.75")))
 //                .andExpect(jsonPath("$.elset", is("170")))
 //                .andExpect(jsonPath("$.rcs", is("1.50")))
-//                .andExpect(jsonPath("$.mission_type", is("Naval Navigation")))
+//                .andExpect(jsonPath("$.missionType", is("Naval Navigation")))
 //                .andExpect(jsonPath("$.status", is("0")));
 //    }
 }

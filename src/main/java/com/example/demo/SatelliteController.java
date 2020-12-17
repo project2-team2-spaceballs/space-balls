@@ -1,9 +1,6 @@
 package com.example.demo;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/satellites")
@@ -16,8 +13,10 @@ public class SatelliteController {
         this.satellite_repo = satellite_repo;
     }
 
+
+    @CrossOrigin(origins="http://localhost:3000")
     @GetMapping("/{id}")
-    public Iterable<Satellite> getSatById(@PathVariable int id) {
+    public Iterable <Satellite> getSatById(@PathVariable int id) {
 
         return this.satellite_repo.getSatById(id);
     }

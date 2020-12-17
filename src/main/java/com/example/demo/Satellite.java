@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -14,7 +15,8 @@ public class Satellite {
     private float inclination;
     private int elset;
     private float rcs;
-    private String mission_type;
+    @Column(name="mission_type")
+    private String missionType;
     private int status;
 
     public int getId() {
@@ -57,12 +59,12 @@ public class Satellite {
         this.rcs = rcs;
     }
 
-    public String getMission_type() {
-        return mission_type;
+    public String getMissionType() {
+        return missionType;
     }
 
-    public void setMission_type(String mission_type) {
-        this.mission_type = mission_type;
+    public void setMissionType(String missionType) {
+        this.missionType = missionType;
     }
 
     public int getStatus() {
