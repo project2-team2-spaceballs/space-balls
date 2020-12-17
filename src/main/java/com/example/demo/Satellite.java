@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "satellites")
-public class SatelliteEntity {
+public class Satellite {
 
     @Id
     private int id;

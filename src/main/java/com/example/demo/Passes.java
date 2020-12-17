@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "satellite_passes")
-public class SatellitePassesEntity {
+public class Passes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
