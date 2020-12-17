@@ -67,4 +67,5 @@ public class OpsCap {
     public void setDetails(String details) {
         this.details = details;
     }
+
 }
