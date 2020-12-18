@@ -66,7 +66,7 @@ public class AssetRequestMessageControllerTest {
             this.mvc.perform(request)
                     .andExpect(status().isOk())
                     .andExpect(content().string("Message saved in database."));
-            String actual = repository.findById(5L).get().getText();
+            String actual = repository.findById(2L).get().getText();
             String expected = "Hey guys, new here, so looking for some help!";
             assertEquals(expected, actual);
     }

@@ -108,7 +108,7 @@ public class AssetRequestControllerTest {
 
         this.mvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.userId", is(5)));
+                .andExpect((jsonPath("$", is(35))));;
 
     }
 

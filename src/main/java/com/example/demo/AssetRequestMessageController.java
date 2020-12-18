@@ -15,7 +15,7 @@ public class AssetRequestMessageController {
 
 
     @GetMapping("")
-    public Iterable<AssetRequestMessage> getUsers() {
+    public Iterable<AssetRequestMessage> getMessages() {
         return this.repository.findAll();
     }
 
@@ -25,7 +25,7 @@ public class AssetRequestMessageController {
     }
 
     @PostMapping("")
-    public String addNewUser(@RequestBody AssetRequestMessage newMessage) {
+    public String addNewMessage(@RequestBody AssetRequestMessage newMessage) {
         this.repository.save(newMessage);
         return "Message saved in database.";
     }
