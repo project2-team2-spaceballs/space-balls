@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import org.springframework.web.bind.annotation.*;
+
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/asset-request")
@@ -28,7 +29,7 @@ public class AssetRequestController {
 
 
     @PostMapping("")
-    public AssetRequest addNewRequest(@RequestBody AssetRequest newRequest) {
-        return this.repository.save(newRequest);
+    public Long addNewRequest(@RequestBody AssetRequest newRequest) {
+        return this.repository.save(newRequest).getId();
     }
 }
