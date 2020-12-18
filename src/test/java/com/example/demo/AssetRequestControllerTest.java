@@ -6,20 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.instanceOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -36,23 +32,65 @@ public class AssetRequestControllerTest {
 
 
     @Test
+    @Transactional
+    @Rollback
     public void testGetAssetRequestById() throws Exception {
+        AssetRequest newRequest;
+        newRequest = new AssetRequest();
+        newRequest.setUserId(1L);
+        newRequest.setSat_id(2237L);
+        newRequest.setPass_start(new GregorianCalendar(2020, Calendar.DECEMBER, 15, 15, 10, 0).getTime());
+        newRequest.setPass_stop(new GregorianCalendar(2020, Calendar.DECEMBER, 15, 15, 20, 0).getTime());
+        newRequest.setLatitude(37.37f);
+        newRequest.setLongitude(-37.37f);
+        newRequest.setElevation(37);
+        newRequest.setStatus("pending");
+        this.repository.save(newRequest);
+
         MockHttpServletRequestBuilder request = get("/asset-request/1");
 
         this.mvc.perform(request)
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.user_id", is(1)))
-                .andExpect((jsonPath("$.latitude", is(41.7532))));
+                .andExpect(jsonPath("$.userId", is(1)))
+                .andExpect((jsonPath("$.latitude", is(37.37))));
     }
 
     @Test
+    @Transactional
+    @Rollback
+    public void testGetAssetRequestByUserId() throws Exception {
+        AssetRequest newRequest;
+        newRequest = new AssetRequest();
+        newRequest.setUserId(5L);
+        newRequest.setSat_id(2238L);
+        newRequest.setPass_start(new GregorianCalendar(2020, Calendar.DECEMBER, 15, 15, 10, 0).getTime());
+        newRequest.setPass_stop(new GregorianCalendar(2020, Calendar.DECEMBER, 15, 15, 20, 0).getTime());
+        newRequest.setLatitude(-38f);
+        newRequest.setLongitude(38f);
+        newRequest.setElevation(38);
+        newRequest.setStatus("pending");
+        this.repository.save(newRequest);
+
+        MockHttpServletRequestBuilder request = get("/asset-request/userId/5");
+
+        this.mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].userId", is(5)))
+                .andExpect((jsonPath("$[0].latitude", is(37.37))))
+                .andExpect(jsonPath("$[1].userId", is(5)))
+                .andExpect((jsonPath("$[1].latitude", is(38.0))));
+    }
+
+    @Test
+    @Transactional
+    @Rollback
     public void testPostNewRequest() throws Exception {
 
         ObjectMapper objectMapper = new ObjectMapper();
         HashMap<String, Object> newRequest = new HashMap<String, Object>(){
             {
-                put("user_id", 5);
+                put("userId", 5);
                 put("sat_id", 1);
                 put("pass_start", new GregorianCalendar(2020, Calendar.DECEMBER, 23, 15, 10, 0));
                 put("pass_stop", new GregorianCalendar(2020, Calendar.DECEMBER, 23, 17, 0, 0));
@@ -70,10 +108,8 @@ public class AssetRequestControllerTest {
 
         this.mvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(content().string("Request saved in database."));
-        String actual = repository.findById(5L).get().getStatus();
-        String expected = "approved";
-        assertEquals(expected, actual);
+                .andExpect(jsonPath("$.userId", is(5)));
+
     }
 
 
