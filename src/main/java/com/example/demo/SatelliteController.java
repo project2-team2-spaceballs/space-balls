@@ -2,6 +2,7 @@ package com.example.demo;
 
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins="http://localhost:3000")
 @RestController
 @RequestMapping("/satellites")
 public class SatelliteController {
@@ -13,8 +14,11 @@ public class SatelliteController {
         this.satellite_repo = satellite_repo;
     }
 
+    @GetMapping("")
+    public Iterable <Satellite> getSats() {
+        return this.satellite_repo.findAll();
+    }
 
-    @CrossOrigin(origins="http://localhost:3000")
     @GetMapping("/{id}")
     public Iterable <Satellite> getSatById(@PathVariable int id) {
 

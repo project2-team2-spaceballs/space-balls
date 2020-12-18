@@ -1,10 +1,8 @@
 package com.example.demo;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins="http://localhost:3000")
 @RestController
 @RequestMapping("/passes")
 public class PassesController {
@@ -14,6 +12,10 @@ public class PassesController {
     public PassesController(PassesRepository passes_repo) {
 
         this.passes_repo = passes_repo;
+    }
+    @GetMapping("")
+    public Iterable <Passes> getPasses() {
+        return this.passes_repo.findAll();
     }
 
     @GetMapping("/{sat_id}")
