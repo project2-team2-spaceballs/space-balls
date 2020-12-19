@@ -8,7 +8,9 @@ public class AssetRequestController {
 
     private final AssetRequestRepository repository;
 
-    public AssetRequestController (AssetRequestRepository repository) {this.repository = repository;}
+    public AssetRequestController(AssetRequestRepository repository) {
+        this.repository = repository;
+    }
 
     @GetMapping("")
     public Iterable<AssetRequest> getAssetRequest() {
@@ -30,5 +32,11 @@ public class AssetRequestController {
     @PostMapping("")
     public AssetRequest addNewRequest(@RequestBody AssetRequest newRequest) {
         return this.repository.save(newRequest);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteRequestById(@PathVariable Long id) {
+        this.repository.deleteById(id);
+        return "Asset request has been deleted.";
     }
 }
