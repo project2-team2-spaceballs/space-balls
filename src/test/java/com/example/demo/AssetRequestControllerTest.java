@@ -63,12 +63,21 @@ public class AssetRequestControllerTest {
         AssetRequest newRequest;
         newRequest = new AssetRequest();
         newRequest.setUserId(5L);
-        newRequest.setSat_id(2238L);
+        newRequest.setSat_id(5555L);
         newRequest.setPass_start(new GregorianCalendar(2020, Calendar.DECEMBER, 15, 15, 10, 0).getTime());
         newRequest.setPass_stop(new GregorianCalendar(2020, Calendar.DECEMBER, 15, 15, 20, 0).getTime());
         newRequest.setLatitude(-38f);
         newRequest.setLongitude(38f);
         newRequest.setElevation(38);
+        newRequest.setStatus("pending");
+        this.repository.save(newRequest);
+        newRequest.setUserId(2L);
+        newRequest.setSat_id(2222L);
+        newRequest.setPass_start(new GregorianCalendar(2020, Calendar.DECEMBER, 15, 15, 10, 0).getTime());
+        newRequest.setPass_stop(new GregorianCalendar(2020, Calendar.DECEMBER, 15, 15, 20, 0).getTime());
+        newRequest.setLatitude(-22f);
+        newRequest.setLongitude(22f);
+        newRequest.setElevation(222);
         newRequest.setStatus("pending");
         this.repository.save(newRequest);
 
@@ -77,9 +86,9 @@ public class AssetRequestControllerTest {
         this.mvc.perform(request)
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].userId", is(5)))
-                .andExpect((jsonPath("$[0].latitude", is(37.37))))
-                .andExpect(jsonPath("$[1].userId", is(5)))
-                .andExpect((jsonPath("$[1].latitude", is(38.0))));
+                .andExpect((jsonPath("$[0].latitude", is(-38.0))))
+                .andExpect(jsonPath("$[1].userId", is(2)))
+                .andExpect((jsonPath("$[1].longitude", is(22.0))));
     }
 
     @Test

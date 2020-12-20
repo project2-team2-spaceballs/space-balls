@@ -21,6 +21,12 @@ public class AssetRequestController {
         return this.repository.findById(id).get();
     }
 
+    @DeleteMapping("/{id}")
+    public String deleteAssetRequestById(@PathVariable Long id) {
+        this.repository.deleteById(id);
+        return "Request Deleted.";
+    }
+
     @GetMapping("/userId/{userId}")
     public Iterable<AssetRequest> getAssetRequestByUserId(@PathVariable Long userId) {
         Iterable<AssetRequest> result = this.repository.findByUserId(userId);
