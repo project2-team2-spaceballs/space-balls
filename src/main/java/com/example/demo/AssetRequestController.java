@@ -40,10 +40,4 @@ public class AssetRequestController {
     public Long addNewRequest(@RequestBody AssetRequest newRequest) {
         return this.repository.save(newRequest).getId();
     }
-
-    @DeleteMapping("/{id}")
-    public String deleteRequestById(@PathVariable Long id) {
-        this.repository.deleteById(id);
-        return "Asset request has been deleted.";
-    }
 }
