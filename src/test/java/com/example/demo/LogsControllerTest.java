@@ -117,7 +117,7 @@ public class LogsControllerTest {
         };
         String json = objectMapper.writeValueAsString(updatedLog);
 
-        MockHttpServletRequestBuilder request = patch("/logs/" + log1.getId())
+        MockHttpServletRequestBuilder request = post("/logs/" + log1.getId())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json);
 
@@ -146,7 +146,7 @@ public class LogsControllerTest {
         };
         String json = objectMapper.writeValueAsString(updatedLog);
 
-        MockHttpServletRequestBuilder request = patch("/logs/" + log1.getId())
+        MockHttpServletRequestBuilder request = post("/logs/" + log1.getId())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json);
 

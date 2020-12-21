@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Optional;
 
+@CrossOrigin(origins="http://localhost:3000")
 @RestController
 @RequestMapping("/logs")
 public class LogsController {
@@ -36,7 +37,7 @@ public class LogsController {
         return this.repository.save(log);
     }
 
-    @PatchMapping("/{id}")
+    @PostMapping("/{id}")
     public Logs updateEntry(@RequestBody Logs logUpdate) throws ResponseStatusException {
         Optional<Logs> result = this.repository.findById(logUpdate.getId());
 
