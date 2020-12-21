@@ -1,7 +1,7 @@
 package com.example.demo;
 
 import org.springframework.web.bind.annotation.*;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/mx")
 public class MxController {
